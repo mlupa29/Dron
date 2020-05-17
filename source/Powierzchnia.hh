@@ -3,7 +3,10 @@
 
 class Powierzchnia : public Plaszczyzna
 {
+/*!
+* \brief konstruktor dla klasy powierzchnia
 
+*/
 public:
     Powierzchnia(std::shared_ptr<drawNS::Draw3DAPI> &api):Plaszczyzna(api)
     {

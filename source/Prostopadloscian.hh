@@ -4,7 +4,10 @@ class Prostopadloscian : public Bryla
 {
 
 public:
-  
+  /*!
+* \brief konstruktor dla klasy Prostopadloscian
+
+*/
     Prostopadloscian(double x, double y, double z,std::shared_ptr<drawNS::Draw3DAPI> &api):Bryla(api)
     {
         kat=0;
@@ -21,8 +24,11 @@ public:
                 krzywa[i][j][1] -= y / 2;
                 krzywa[i][j][2] -= y / 2;
             }
-        //////////////////////////////
-      
+       
+      /*!
+* \brief ustawienie wierzcholkow
+
+*/
 
         krzywa[0][1][1] += y;
 

@@ -2,7 +2,10 @@
 
 class Granaistoslup : public Bryla
 {
+/*!
+* \brief konstruktor dla klasy graniastoslup
 
+*/
 public:
     Granaistoslup(double x, double y, double z,std::shared_ptr<drawNS::Draw3DAPI> &api):Bryla(api)
     {
@@ -20,7 +23,10 @@ public:
                 krzywa[i][j][1] -= y / 2;
                 krzywa[i][j][2] -= z / 2;
             }
-        //////////////////////////////
+        /*!
+* \brief ustawienie wierzcholkow
+
+*/
       
 
         krzywa[0][1][1] += y;

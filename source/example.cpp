@@ -22,26 +22,32 @@ void wait4key() {
 int main() {
   std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-60,60,-60,60,-60,60,5000)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
   //drawNS::Draw3DAPI * api = new APIGnuPlot3D(-5,5,-5,5,-5,5,1000); //alternatywnie zwykły wskaźnik
+ 
+ /******************
+ Z TEGO POWINNA BYC KLASA DRONA ALE SZUKANIE PROBLEMOW I ICH ROZWIAZAN JEST TAK DLA MNIE LATWIEJSZE 
+ *******************/
  Granaistoslup s1(3,3,3,api);
  Granaistoslup s2(3,3,3,api);
  Prostopadloscian a(10,10,10,api);
  Powierzchnia po(api);
-Dno d(api);
+ Dno d(api);
+
+
 d.rysuj();
-po.rysuj();
+
 
  a.ruch(0,0);
 
  a.rysuj(); 
- s2.przesun(a.get_wirz(0,3));
- s2.ruch(0,0);
+  s2.przesun(a.get_wirz(0,3));
+  s2.ruch(0,0);
 
  s2.rysuj();
  s1.przesun(a.get_wirz(0,2));
  s1.ruch(0,0);
 
  s1.rysuj();
- 
+ po.rysuj();
 char men = 'h';
 
 while(men!='q'){
@@ -62,7 +68,7 @@ case 'p':
   a.ruch(1,0);
   s1.ruch(1,0);
   s1.rysuj();
-   s2.ruch(1,0);
+  s2.ruch(1,0);
   s2.rysuj();
   a.rysuj();
   api->change_ref_time_ms(1000);
@@ -87,7 +93,7 @@ case 'g':
   s1.pion(1,0);
   s1.rysuj();
    s2.pion(1,0);
-  s2.rysuj();
+ s2.rysuj();
   a.rysuj();
   api->change_ref_time_ms(1000);
   usleep(5000);
@@ -103,7 +109,7 @@ case 'g':
   a.pion(-1,0);
   s1.pion(-1,0);
   s1.rysuj();
-   s2.pion(-1,0);
+  s2.pion(-1,0);
   s2.rysuj();
   a.rysuj();
   api->change_ref_time_ms(1000);
@@ -135,17 +141,13 @@ case 'o':
  api->change_ref_time_ms(5000);
 break;
 }
-}
-}
-/*
-for(int i=0; i<10; i++)
+default:
 {
-    a.ruch(1,0);
- 
-  a.rysuj(); 
+  continue;
+}
+}
 }
 
-*/
 
  
  //odświeżanie sceny zmienione na opcję "z każdym pojawieniem się lub zniknięciem kształtu"

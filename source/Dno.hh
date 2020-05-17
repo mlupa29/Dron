@@ -3,7 +3,10 @@
 
 class Dno : public Plaszczyzna
 {
+/*!
+* \brief konstruktor dla klasy dno
 
+*/
 public:
     Dno(std::shared_ptr<drawNS::Draw3DAPI> &api):Plaszczyzna(api)
     {

@@ -25,21 +25,28 @@ protected:
 std::shared_ptr<drawNS::Draw3DAPI> &api;
 int id;
     public:
+/*!
+* \brief konstruktor dla klasy plaszczyzna
 
+*/
     Plaszczyzna(std::shared_ptr<drawNS::Draw3DAPI> &api):api(api)
     {
 
     }
 
- 
+ /*!
+* \brief virtualna metoda odpowiadajaca za rysowanie obiektow klasy Plaszczyzna
+
+*/
+
     void rysuj()
     {  
        
          vector<vector<Point3D>> proste;
-               for(int i=0; i<krzywa.size(); i++)
+               for(uint i=0; i<krzywa.size(); i++)
         {
             vector<Point3D> punkty;
-            for(int j=0; j<krzywa.at(i).size(); j++)
+            for(uint j=0; j<krzywa.at(i).size(); j++)
             {
                 Point3D punkt(kop_krzywa[i][j][0],kop_krzywa[i][j][1],kop_krzywa[i][j][2]);
                 punkty.push_back(punkt);
