@@ -45,7 +45,7 @@ protected:
 
 */
 
-virtual void przesun(Wektor3D przesuniecie)
+ void przesun(Wektor3D przesuniecie)
     {
       
         przes=przes+(przesuniecie);
@@ -68,7 +68,7 @@ Wektor3D get_przsuniecie(){
 * \brief virtualna metoda odpowiadajaca za ruch w plaszczyznie
 
 */
-   virtual void ruch(double przesuniecie, double kat_obr)
+   void ruch(double przesuniecie, double kat_obr)
     {
         Wektor3D przesun;
         przesun[0]=przesuniecie;
@@ -88,7 +88,7 @@ Wektor3D get_przsuniecie(){
 * \brief virtualna metoda odpowiadajaca za ruch w pionie
 
 */
-   virtual void pion(double przesuniecie, double kat_obr)
+    void pion(double przesuniecie, double kat_obr)
     {
         Wektor3D przesun;
         przesun[2]=przesuniecie;
@@ -125,7 +125,7 @@ Wektor3D get_przsuniecie(){
 
 */
 
-  virtual  void rysuj()
+    void rysuj()
     {
           api->erase_shape(id); 
          vector<vector<Point3D>> proste;
