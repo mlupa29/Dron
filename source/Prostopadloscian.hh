@@ -11,8 +11,11 @@ public:
     Prostopadloscian(double x, double y, double z,std::shared_ptr<drawNS::Draw3DAPI> &api):Bryla(api)
     {
         kat=0;
+        kat_sm=0;
+        kat_wz=0;
         krzywa.resize(2);
         kop_krzywa.resize(2);
+        
         for (int i = 0; i < krzywa.size(); i++){
             krzywa[i].resize(4);
                kop_krzywa[i].resize(4);

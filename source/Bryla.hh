@@ -27,14 +27,27 @@ protected:
     vector<vector<Wektor3D>> kop_krzywa;
     Wektor3D przes;
     double kat;
+    double kat_sm;
+    double kat_wz;
     Macierz3x3 Ma;
+    Macierz3x3 MoX;
+      Macierz3x3 MoY;
     std::shared_ptr<drawNS::Draw3DAPI> &api;
+    Wektor3D srodek;
     int id;
     public:
 /*!
 * \brief konstruktor obiektow klasy Bryla
 
 */
+Wektor3D get_srodek()
+{
+    return przes;
+}
+    Wektor3D set_srodek(Wektor3D srodek)
+    {
+        this->srodek=srodek;
+    }
     Bryla(std::shared_ptr<drawNS::Draw3DAPI> &api):api(api)
     {
 
@@ -45,7 +58,12 @@ protected:
 
 */
 
- void przesun(Wektor3D przesuniecie)
+
+
+
+
+
+virtual void przesun(Wektor3D przesuniecie)
     {
       
         przes=przes+(przesuniecie);
@@ -59,27 +77,31 @@ protected:
 
     }
 
+    
+
 Wektor3D get_przsuniecie(){
     return przes;
 }
-    Wektor3D get_wirz(int i,int j){return krzywa[i][j];}
+    Wektor3D get_wirz(int i,int j){return kop_krzywa[i][j];}
 
 /*!
 * \brief virtualna metoda odpowiadajaca za ruch w plaszczyznie
 
 */
-   void ruch(double przesuniecie, double kat_obr)
+   virtual void ruch(double przesuniecie, double kat_obr)
     {
         Wektor3D przesun;
         przesun[0]=przesuniecie;
         kat+=kat_obr;
+        macierzX();
+          
         macierz();
-        przes=przes+(Ma*przesun);
+        przes=przes+(Ma*(przesun));
         for(uint i=0; i<krzywa.size(); i++)
         {
             for(uint j=0; j<krzywa.at(i).size(); j++)
             {
-                kop_krzywa[i][j]=(Ma*krzywa[i][j])+przes;
+                kop_krzywa[i][j]=Ma*(MoX*(krzywa[i][j]-srodek))+przes+srodek;
             } 
         }
 
@@ -88,26 +110,51 @@ Wektor3D get_przsuniecie(){
 * \brief virtualna metoda odpowiadajaca za ruch w pionie
 
 */
-    void pion(double przesuniecie, double kat_obr)
+   virtual void pion(double przesuniecie, double kat_obr)
     {
         Wektor3D przesun;
-        przesun[2]=przesuniecie;
-        kat+=kat_obr;
+        przesun[0]=przesuniecie;
+        kat_wz=kat_obr;
+        macierzX();
+        macierzY();
         macierz();
-        przes=przes+(Ma*przesun);
+        przes=przes+Ma*(MoY*przesun);
         for(uint i=0; i<krzywa.size(); i++)
+
         {
             for(uint j=0; j<krzywa.at(i).size(); j++)
             {
-                kop_krzywa[i][j]=(Ma*krzywa[i][j])+przes;
+                kop_krzywa[i][j]=Ma*(MoX*(krzywa[i][j]-srodek))+przes+srodek;
             } 
         }
 
     }
+
+
+ virtual void osx(double przesuniecie, double kat_obr)
+    {
+        Wektor3D przesun;
+        przesun[0]=przesuniecie;
+        kat_sm+=kat_obr;
+        macierzX();
+        macierz();
+        //cout<<MoX[1]<<endl;
+        for(uint i=0; i<krzywa.size(); i++)
+        {
+            for(uint j=0; j<krzywa.at(i).size(); j++)
+            {
+                kop_krzywa[i][j]=Ma*(MoX*(krzywa[i][j]-srodek))+przes+srodek;
+            } 
+        }
+
+    }
+
 /*!
 * \brief macierz obrotu
 
 */
+
+
 
     void macierz()
     {
@@ -116,8 +163,25 @@ Wektor3D get_przsuniecie(){
           Ma[1][0]=sin(kat*M_PI/180);
            Ma[1][1]=cos(kat*M_PI/180);
             Ma[2][2]=1;
-   
+    }
 
+
+     void macierzY()
+    {
+        MoY[0][0]=cos(kat_wz*M_PI/180);
+         MoY[0][2]=sin(kat_wz*M_PI/180);
+          MoY[1][1]=1;
+           MoY[2][0]=-sin(kat_wz*M_PI/180);
+            MoY[2][2]=cos(kat_wz*M_PI/180);
+    }
+
+     void macierzX()
+    {
+        MoX[0][0]=1;
+         MoX[1][2]=-sin(kat_sm*M_PI/180);
+          MoX[1][1]=cos(kat_sm*M_PI/180);
+           MoX[2][1]=sin(kat_sm*M_PI/180);
+            MoX[2][2]=cos(kat_sm*M_PI/180);
     }
 
 /*!
@@ -125,7 +189,7 @@ Wektor3D get_przsuniecie(){
 
 */
 
-    void rysuj()
+  virtual  void rysuj()
     {
           api->erase_shape(id); 
          vector<vector<Point3D>> proste;

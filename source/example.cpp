@@ -20,19 +20,17 @@ void wait4key() {
 }
 
 int main() {
-  std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-60,60,-60,60,-60,60,5000)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
+  std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-60,60,-60,60,-60,60,0)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
   //drawNS::Draw3DAPI * api = new APIGnuPlot3D(-5,5,-5,5,-5,5,1000); //alternatywnie zwykły wskaźnik
  
- /******************
- Z TEGO POWINNA BYC KLASA DRONA ALE SZUKANIE PROBLEMOW I ICH ROZWIAZAN JEST TAK DLA MNIE LATWIEJSZE 
- *******************/
+ 
  Granaistoslup s1(3,3,3,api);
  Granaistoslup s2(3,3,3,api);
  Prostopadloscian a(10,10,10,api);
  Powierzchnia po(api);
  Dno d(api);
 
-
+po.rysuj();
 d.rysuj();
 
 
@@ -47,7 +45,7 @@ d.rysuj();
  s1.ruch(0,0);
 
  s1.rysuj();
- po.rysuj();
+ 
 char men = 'h';
 
 while(men!='q'){
@@ -57,6 +55,7 @@ cout<<"o - obrot"<<endl;
 cout<<"g - przesuniecie gora/dol"<<endl;
 cout<<"q - koniec"<<endl;
   std::cin>>men;
+
 switch(men){
 case 'p':
 {
@@ -70,12 +69,14 @@ case 'p':
   s1.rysuj();
   s2.ruch(1,0);
   s2.rysuj();
+  
+  s1.osx(0,10);
+  s2.osx(0,-10);
   a.rysuj();
-  api->change_ref_time_ms(1000);
-  usleep(5000);
+  
+  usleep(120000);
  
 }
-  api->change_ref_time_ms(5000);
   break;
 
 }
@@ -84,40 +85,27 @@ case 'p':
 case 'g':
 {
  cout<<"Podaj przesuniecie"<<endl;
- double przes; 
- cin>>przes;
- if(przes>=0){
- for(int i=0; i<przes; i++)
+ double przesu; 
+ cin>>przesu;
+ cout<<"Podaj kat"<<endl;
+ double kat; 
+ cin>>kat;
+ 
+ for(int i=0; i<przesu; i++)
 {
-  a.pion(1,0);
-  s1.pion(1,0);
+  a.pion(1,kat);
+  s1.pion(1,kat);
+  s2.pion(1,kat);
   s1.rysuj();
-   s2.pion(1,0);
  s2.rysuj();
   a.rysuj();
-  api->change_ref_time_ms(1000);
-  usleep(5000);
+   usleep(200000);
  }
- api->change_ref_time_ms(5000);
   break;
-}
-  else
-  {
-    przes = -przes;
-     for(int i=0; i<przes; i++)
-{
-  a.pion(-1,0);
-  s1.pion(-1,0);
-  s1.rysuj();
-  s2.pion(-1,0);
-  s2.rysuj();
-  a.rysuj();
-  api->change_ref_time_ms(1000);
-  usleep(5000);
- }
- api->change_ref_time_ms(5000);
+
+// api->change_ref_time_ms(5000);
   break;
-  }
+
 
 }
 
@@ -129,16 +117,19 @@ case 'o':
    for(int i=0; i<k; i++)
 {
     a.ruch(0,1);
+    
+  s1.przesun(a.get_wirz(0,2));
+     s2.przesun(a.get_wirz(0,3));
       s1.ruch(0,1);
+       s2.ruch(0,1);
   s1.rysuj();
-   s2.ruch(0,1);
+ 
    
   s2.rysuj();
   a.rysuj(); 
-   api->change_ref_time_ms(1000);
-  usleep(5000);
+   usleep(100000);
 }
- api->change_ref_time_ms(5000);
+
 break;
 }
 default:

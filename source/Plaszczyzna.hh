@@ -53,8 +53,9 @@ int id;
             }
             proste.push_back(punkty);
         }
-        
- api->draw_surface(proste,"blue");
+          
+ id=api->draw_surface(proste,"blue");   
+ id=api->draw_surface(proste,"blue");
     }
 
 

@@ -10,6 +10,7 @@ public:
     Granaistoslup(double x, double y, double z,std::shared_ptr<drawNS::Draw3DAPI> &api):Bryla(api)
     {
         kat=0;
+        kat_sm=0;
         krzywa.resize(2);
         kop_krzywa.resize(2);
         for (int i = 0; i < krzywa.size(); i++){
@@ -66,6 +67,19 @@ krzywa[1][5][0] += x;
         krzywa[1][5][2] += z/2;
 
 
+
+    }
+    virtual void przesun(Wektor3D przesuniecie)
+    {
+      
+        przes=(przesuniecie);
+        for(uint i=0; i<krzywa.size(); i++)
+        {
+            for(uint j=0; j<krzywa.at(i).size(); j++)
+            {
+                kop_krzywa[i][j]=(krzywa[i][j])+przes;
+            } 
+        }
 
     }
 };
