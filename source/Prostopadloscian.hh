@@ -8,6 +8,9 @@ public:
 * \brief konstruktor dla klasy Prostopadloscian
 
 */
+    
+
+
     Prostopadloscian(double x, double y, double z,std::shared_ptr<drawNS::Draw3DAPI> &api):Bryla(api)
     {
         kat=0;

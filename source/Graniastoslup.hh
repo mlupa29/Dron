@@ -3,10 +3,14 @@
 class Granaistoslup : public Bryla
 {
 /*!
-* \brief konstruktor dla klasy graniastoslup
-
-*/
+ *\file Konstruktor klasy Graniasoslup
+ * \brief Modeluje pojecie Graniastoslupa
+ * 
+ */
 public:
+
+    
+
     Granaistoslup(double x, double y, double z,std::shared_ptr<drawNS::Draw3DAPI> &api):Bryla(api)
     {
         kat=0;
@@ -24,10 +28,6 @@ public:
                 krzywa[i][j][1] -= y / 2;
                 krzywa[i][j][2] -= z / 2;
             }
-        /*!
-* \brief ustawienie wierzcholkow
-
-*/
       
 
         krzywa[0][1][1] += y;
@@ -44,7 +44,7 @@ public:
          krzywa[0][5][1] -= y/2;
         krzywa[0][5][2] += z/2;
 
-/////////////////////////////////////////////////
+
   
 
 krzywa[1][0][0] += x;
