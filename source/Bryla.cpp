@@ -133,6 +133,7 @@ using std::endl;
         }
         
  id=api->draw_polyhedron(proste,"red");
+
     }
 
 

@@ -14,18 +14,18 @@ public:
    
     
         int k=0,m=0;
-        for (int i = -20; i <= 20; i+=5)
+        for (int i = -60; i <= 60; i+=10)
         {
             krzywa.resize(krzywa.size()+1);
             kop_krzywa.resize(krzywa.size()+1);
                  k=0;
-            for (int j = -20; j <= 20; j+=5)
+            for (int j = -60; j <= 60; j+=10)
             {
                 kop_krzywa[m].resize(krzywa[m].size()+1);
                 krzywa[m].resize(krzywa[m].size()+1);
                 kop_krzywa[m][k][0] = i;
                 kop_krzywa[m][k][1] = j;
-                kop_krzywa[m][k][2] = -20;
+                kop_krzywa[m][k][2] = -40;
                 k++;
             }
             m++;

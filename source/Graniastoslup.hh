@@ -1,16 +1,14 @@
+#ifndef GRANIASTO_HH
+#define GRANIASTO_HH
 #include "Bryla.hh"
 
 class Granaistoslup : public Bryla
 {
 /*!
- *\file Konstruktor klasy Graniasoslup
- * \brief Modeluje pojecie Graniastoslupa
- * 
- */
+* \brief konstruktor dla klasy graniastoslup
+
+*/
 public:
-
-    
-
     Granaistoslup(double x, double y, double z,std::shared_ptr<drawNS::Draw3DAPI> &api):Bryla(api)
     {
         kat=0;
@@ -28,6 +26,10 @@ public:
                 krzywa[i][j][1] -= y / 2;
                 krzywa[i][j][2] -= z / 2;
             }
+        /*!
+* \brief ustawienie wierzcholkow
+
+*/
       
 
         krzywa[0][1][1] += y;
@@ -44,7 +46,7 @@ public:
          krzywa[0][5][1] -= y/2;
         krzywa[0][5][2] += z/2;
 
-
+/////////////////////////////////////////////////
   
 
 krzywa[1][0][0] += x;
@@ -83,3 +85,4 @@ krzywa[1][5][0] += x;
 
     }
 };
+#endif

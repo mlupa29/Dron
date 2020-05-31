@@ -23,6 +23,7 @@ using std::endl;
           
  id=api->draw_surface(proste,"blue");   
  id=api->draw_surface(proste,"blue");
+  id=api->draw_surface(proste,"blue");
     }
 
 

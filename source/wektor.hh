@@ -2,7 +2,7 @@
 #define WEKTOR_HH
 
 #include <iostream>
-
+#include <math.h>
 
 template<typename Typ, int Siz >
 class Wektor {
@@ -19,10 +19,18 @@ public:
     Typ operator *(Wektor<Typ, Siz> W);
     Wektor<Typ, Siz> operator /(Typ skalar);
     Wektor<Typ, Siz> operator *(Typ skalar) ;
-
+    double dlugosc();
 
 };
+template<class Typ, int Siz>
+double Wektor<Typ,Siz>::dlugosc(){
+double dlugosc = 0;
 
+for(int i=0; i <Siz ; i++){
+    dlugosc += pow(this->Tab[i],2);
+}
+return sqrt(dlugosc);
+}
 
 
 template<class Typ, int Siz >

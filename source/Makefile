@@ -4,7 +4,7 @@ __start__: example.out
 	./example.out
 
 example.out: Dr3D_gnuplot_api.o example.o  Bryla.o Plaszczyzna.o  
-	g++ -o example.out example.o Dr3D_gnuplot_api.o Bryla.o Plaszczyzna.o   -lpthread
+	g++ -o example.out example.o Dr3D_gnuplot_api.o Bryla.o Plaszczyzna.o  -lpthread
 
 example.o: example.cpp Dr3D_gnuplot_api.hh
 	g++ ${CPPFLAGS} -o example.o example.cpp
@@ -17,6 +17,17 @@ Bryla.o: Bryla.cpp Bryla.hh
 
 Plaszczyzna.o: Plaszczyzna.cpp Plaszczyzna.hh
 	g++ ${CPPFLAGS} -o Plaszczyzna.o Plaszczyzna.cpp
+
+# Graniastoslup.o:  Graniastoslup.cpp Graniastoslup.hh
+# 	g++ ${CPPFLAGS} -o Graniastoslup.o Graniastoslup.cpp
+# Dron.o: Dron.cpp Dron.hh
+# 	g++ ${CPPFLAGS} -o Dron.o Dron.cpp
+
+# Prostopadloscian.o: Prostopadloscian.cpp Prostopadloscian.hh
+#  	g++ ${CPPFLAGS} -o Prostopadloscian.o Prostopadloscian.cpp 
+
+# Dno.o: Dno.cpp Dno.hh
+# 	g++ ${CPPFLAGS} -o Dno.o Dno.cpp
 
 Dr3D_gnuplot_api.hh: Draw3D_api_interface.hh
 	touch Dr3D_gnuplot_api.hh

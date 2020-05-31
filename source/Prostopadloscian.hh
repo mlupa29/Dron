@@ -1,3 +1,4 @@
+#pragma once
 #include "Bryla.hh"
 
 class Prostopadloscian : public Bryla
@@ -8,7 +9,9 @@ public:
 * \brief konstruktor dla klasy Prostopadloscian
 
 */
-    
+    Prostopadloscian();
+
+double promien(){return sqrt(pow((krzywa[0][0][0]-this->srodek[0]),2)+pow((krzywa[0][0][1]-this->srodek[1]),2)+pow((krzywa[0][0][2]-this->srodek[2]),2)) ;}
 
 
     Prostopadloscian(double x, double y, double z,std::shared_ptr<drawNS::Draw3DAPI> &api):Bryla(api)
@@ -31,10 +34,7 @@ public:
                 krzywa[i][j][2] -= y / 2;
             }
        
-      /*!
-* \brief ustawienie wierzcholkow
 
-*/
 
         krzywa[0][1][1] += y;
 
@@ -44,7 +44,7 @@ public:
 
         krzywa[0][3][2] += z;
       
-/////////////////////////////////////////////////
+
   
   krzywa[1][0][0] += x;
 
@@ -56,6 +56,6 @@ public:
 
         krzywa[1][3][0] += x;
         krzywa[1][3][2] += z;
-        /////////////////////////////////
+      
     }
 };
